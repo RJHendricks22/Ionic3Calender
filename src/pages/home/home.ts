@@ -5,6 +5,7 @@ import { NavController } from 'ionic-angular';
   selector: 'page-home',
   templateUrl: 'home.html'
 })
+
 export class HomePage {
   date: any;
   daysInThisMonth: any;
@@ -14,9 +15,14 @@ export class HomePage {
   currentMonth: any;
   currentYear: any;
   currentDate: any;
-
   constructor(public navCtrl: NavController) {
+  }
 
+  ionViewWillEnter() {
+    this.date = new Date();
+    this.monthNames = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+    this.getDaysOfMonth();
+    // this.loadEventThisMonth();
   }
 
   getDaysOfMonth() {
@@ -37,7 +43,13 @@ export class HomePage {
     for(var i = prevNumOfDays-(firstDayThisMonth-1); i <= prevNumOfDays; i++) {
       this.daysInLastMonth.push(i);
     }
+    var thisNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDate();
+    for (var j = 0; j < thisNumOfDays; j++) {
+      this.daysInThisMonth.push(j+1);
+    }
+
     var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth()+1, 0).getDay();
+
     var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth()+2, 0).getDate();
     for (var i = 0; i < (6-lastDayThisMonth); i++) {
       this.daysInNextMonth.push(i+1);
