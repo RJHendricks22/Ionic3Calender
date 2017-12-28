@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AddEventPage } from '../add-event/add-event';
 
 @Component({
   selector: 'page-home',
@@ -72,5 +73,8 @@ export class HomePage {
     this.getDaysOfMonth();
   }
 
+  addEvent() {
+    this.navCtrl.push(AddEventPage);
+  }
 
 }
